@@ -19,7 +19,7 @@ async function loadPairing(searchParams: URLSearchParams): Promise<[string, Rece
     const key = searchParams.get(`key`)!;
     const pairing = searchParams.get(`pairing`)!;
 
-    return [name, {name: CryptoJS.AES.decrypt(pairing, key).toString(CryptoJS.enc.Utf8)}];
+    return [name, { name: CryptoJS.AES.decrypt(pairing, key).toString(CryptoJS.enc.Utf8) }];
   }
 
   if (searchParams.has(`to`)) {
@@ -33,7 +33,7 @@ async function loadPairing(searchParams: URLSearchParams): Promise<[string, Rece
       return [from, data];
     } catch {
       // If parsing fails, it's the old format (just the name)
-      return [from, {name: decrypted, hint: undefined} as ReceiverData];
+      return [from, { name: decrypted, hint: undefined } as ReceiverData];
     }
   }
 
@@ -73,14 +73,14 @@ export function Pairing() {
   }
 
   const menuItems = [
-    <MenuItem key={`back`} to="/" icon={<ArrowLeft weight={`bold`}/>}>
+    <MenuItem key={`back`} to="/" icon={<ArrowLeft weight={`bold`} />}>
       {t('pairing.startYourOwn')}
     </MenuItem>
   ];
 
   return (
     <Layout menuItems={menuItems}>
-      <div>
+      <div className="lg:ml-auto lg:w-1/2">
         {!loading && assignment && (
           <motion.div
             initial={{ rotateZ: -360 * 1, scale: 0 }}
@@ -106,7 +106,7 @@ export function Pairing() {
               {(instructions || assignment[1].hint) && (
                 <div className="mt-6 flex p-4 bg-gray-50 rounded-lg leading-6 text-gray-600 whitespace-pre-wrap">
                   <div className="mr-4">
-                    <Info size={24}/>
+                    <Info size={24} />
                   </div>
                   <div className="space-y-2">
                     {assignment[1].hint && <p>{assignment[1].hint}</p>}
